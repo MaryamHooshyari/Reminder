@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}ADD Task{% endblock title %}
+
+{% block content %}
+    <br><br>
+    <h1>New Task</h1>
+    <form action="" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+    </form>
+    <div><a href="{% url 'add_category' %}">ADD Category</a></div>
+{% endblock content %}
