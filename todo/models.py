@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -27,4 +28,7 @@ class Task(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('task_detail', args=[str(self.id)])

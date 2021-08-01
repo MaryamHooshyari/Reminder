@@ -3,11 +3,25 @@
 {% block title %}Category List{% endblock title %}
 
 {% block content %}
+
+    <h2 class="ms-4">Categories:</h2>
     {% for category in object_list %}
-        <div class="">
-            <h4><a href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
-            <p></p>
+        <div class="container">
+            <div class="row">
+                <h4 class="col-12 p-2 border bg-light"><a href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
+            </div>
         </div>
     {% endfor %}
-    <div><a href="{% url 'add_category' %}">ADD Category</a></div>
+
+<br><br>
+
+    <h3 class="ms-4">Categories with no tasks:</h3>
+    {% for category in object_list %}
+        <div class="container">
+            <div class="row">
+                <h4 class="col-12 p-2 border bg-light"><a href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock content %}

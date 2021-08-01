@@ -42,7 +42,7 @@ class CategoryListView(ListView):
 
 class CategoryDetailView(DetailView):
     model = Category
-    template_name = 'todo/task_detail.html'
+    template_name = 'todo/category_detail.html'
 
 
 class CategoryCreateView(CreateView):
@@ -54,11 +54,12 @@ class CategoryCreateView(CreateView):
 
 class CategoryUpdateView(UpdateView):
     model = Category
-    template_name = 'blog/post_edit.html'
-    fields = ['title', 'body']
+    template_name = 'todo/category_edit.html'
+    fields = ['name']
+    success_url = reverse_lazy('category_list')
 
 
 class CategoryDeleteView(DeleteView):
     model = Category
-    template_name = 'blog/post_delete.html'
+    template_name = 'todo/category_delete.html'
     success_url = reverse_lazy('category_list')

@@ -3,12 +3,10 @@
 {% block title %}Home Page{% endblock title %}
 
 {% block content %}
-    <ul>
-      <li><a href="#">Admin</a></li>
-      <li><a href="{% url 'category_list' %}">Categories</a></li>
-      <li><a href="{% url 'task_list' %}">Tasks</a></li>
-    </ul>
-
-  <div><a href="{% url 'add_task' %}">ADD new task</a></div>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-12 p-4 border bg-light"><a href="{% url 'add_task' %}">ADD Task</a></div>
+      <div class="col-12 p-4 border bg-light"><a href="{% url 'add_category' %}">ADD Category</a></div>
+    </div>
+  </div>
 {% endblock content %}

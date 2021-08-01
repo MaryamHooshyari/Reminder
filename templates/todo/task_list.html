@@ -4,7 +4,7 @@
 
 {% block content %}
     {% for task in object_list %}
-        <div class="">
+        <div class="article-entry">
             <h2><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></h2>
             <p>{{ task.due_date }}</p>
         </div>

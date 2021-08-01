@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{object.name}}{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h2>{{object.name}}</h2>
+    {% for task in object_list %}
+        <div class="article-entry">
+            <h3><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></h3>
+            <p>{{ task.due_date }}</p>
+        </div>
+    {% endfor %}
+<br><br>
+    <p><a href="{% url 'category_edit' object.pk %}">Edit Category</a></p>
+    <p><a href="{% url 'category_delete' object.pk %}">Delete Category</a></p>
+</div>
+{% endblock content %}
