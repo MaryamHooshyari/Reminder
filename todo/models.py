@@ -23,7 +23,9 @@ class Task(models.Model):
     due_date = models.DateTimeField()
     priority = models.CharField(max_length=5, choices=PRIORITY_CHOICES, default='1')
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='tasks')
+    # 0: in progress & 1: done
+    status = models.CharField(max_length=1, default='0')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -32,3 +34,6 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         return reverse('task_detail', args=[str(self.id)])
+
+    def done(self):
+        self.status = '1'

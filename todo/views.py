@@ -41,6 +41,7 @@ class CategoryListView(ListView):
 
 
 class CategoryDetailView(DetailView):
+    query_pk_and_slug = Task.objects
     model = Category
     template_name = 'todo/category_detail.html'
 

@@ -6,7 +6,6 @@ from .views import TaskListView, TaskDetailView, TaskCreateView, TaskUpdateView,
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
-    # path('admin/', admin.site.urls, name='admin'),
     path('categories/', CategoryListView.as_view(), name='category_list'),
     path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category_detail'),
     path('categories/<int:pk>/edit', CategoryUpdateView.as_view(), name='category_edit'),

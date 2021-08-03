@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}{{object.title}}{% endblock title %}
+
+{% block title %}
+  {% for word in object.title.split %}
+    {{ word.capitalize }}
+  {% endfor %}
+{% endblock title %}
 
 {% block content %}
   <div class="">
     <h2>{{ object.title }}</h2>
-    <p>description: {{ object.description}}</p>
-    <p>due date: {{ object.due_date}}</p>
-    <p>priority: {{ object.priority}}</p>
-    <p>category: {{ object.category}}</p>
+    <ul>
+      <li>description: {{ object.description}}</li>
+      <li>due date: {{ object.due_date}}</li>
+      <li>priority: {{ object.priority}}</li>
+      <li>category: {{ object.category}}</li>
+    </ul>
   </div>
-  <p><a href="{% url 'task_edit' object.pk %}">Edit Task</a></p>
-  <p><a href="{% url 'task_delete' object.pk %}">Delete Task</a></p>
+  <p><a class="btn btn-warning" href="{% url 'task_edit' object.pk %}">Edit Task</a></p>
+  <p><a class="btn btn-danger" href="{% url 'task_delete' object.pk %}">Delete Task</a></p>
 {% endblock content %}

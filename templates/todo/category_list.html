@@ -4,24 +4,20 @@
 
 {% block content %}
 
-    <h2 class="ms-4">Categories:</h2>
+    <h2 class="">Categories:</h2>
     {% for category in object_list %}
-        <div class="container">
-            <div class="row">
-                <h4 class="col-12 p-2 border bg-light"><a href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
+            <div class="row justify-content-around">
+                <h4 class="col-10 p-2 border bg-dark"><a class="text-decoration-none text-info" href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
             </div>
-        </div>
     {% endfor %}
 
 <br><br>
 
-    <h3 class="ms-4">Categories with no tasks:</h3>
+    <h3 class="">Categories with no tasks:</h3>
     {% for category in object_list %}
-        <div class="container">
-            <div class="row">
-                <h4 class="col-12 p-2 border bg-light"><a href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
+            <div class="row justify-content-around">
+                <h4 class="col-10 p-2 border bg-dark"><a class="text-decoration-none text-info" href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
             </div>
-        </div>
     {% endfor %}
 
 {% endblock content %}
