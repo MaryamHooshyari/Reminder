@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import TemplateView
 from .views import TaskListView, TaskDetailView, TaskCreateView, TaskUpdateView, TaskDeleteView,\
-    CategoryListView, CategoryDetailView, CategoryCreateView, CategoryUpdateView, CategoryDeleteView
+    CategoryListView, CategoryDetailView, CategoryCreateView, CategoryUpdateView, CategoryDeleteView,\
+    OverdueTaskList
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
@@ -16,4 +17,5 @@ urlpatterns = [
     path('tasks/<int:pk>/delete', TaskDeleteView.as_view(), name='task_delete'),
     path('addTask/', TaskCreateView.as_view(), name='add_task'),
     path('addCategory/', CategoryCreateView.as_view(), name='add_category'),
+    path('overdue/', OverdueTaskList.as_view(), name='overdue_task'),
 ]

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Overdue Tasks{% endblock title %}
+
+{% block content %}
+<div class="row ">
+        {% for task in object_list %}
+            {% if task.status == '0' %}
+                <div class="col-12 bg-light article-entry">
+                    <br><h2><a class="text-info" href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></h2>
+                    <input class="btn btn-success" type="submit" value="Finished">
+                    <hr class="p-1 bg-dark">
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}

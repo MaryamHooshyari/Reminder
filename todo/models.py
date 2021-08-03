@@ -1,5 +1,26 @@
 from django.db import models
+from django.db.models import Count
 from django.urls import reverse
+from datetime import datetime
+import pytz
+
+
+class TaskManager(models.Manager):
+    def overdue_task(self):
+        return self.filter(due_date__lt=datetime.now(pytz.timezone('Asia/Tehran')))
+
+    def no_task(self):
+        tasks = self.all()
+        used_cats = []
+        for task in tasks:
+            used_cats.append(task.category)
+        set(used_cats)
+        cats = Category.objects.all()
+        result = []
+        for cat in cats:
+            if cat not in used_cats:
+                result.append(cat)
+        return result
 
 
 class Category(models.Model):
@@ -28,6 +49,7 @@ class Task(models.Model):
     status = models.CharField(max_length=1, default='0')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    objects = TaskManager()
 
     def __str__(self):
         return self.title

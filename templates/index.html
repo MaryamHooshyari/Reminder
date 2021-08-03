@@ -4,7 +4,8 @@
 
 {% block content %}
     <div class="row justify-content-around">
-      <div class="col-4 p-4 border bg-dark"><a class="text-decoration-none text-info" href="{% url 'add_task' %}">ADD Task</a></div>
-      <div class="col-4 p-4 border bg-dark"><a class="text-decoration-none text-info" href="{% url 'add_category' %}">ADD Category</a></div>
+        <div class="col-4 p-4 border bg-dark text-center"><a class="text-decoration-none text-info fs-2" href="{% url 'add_task' %}">ADD Task</a></div>
+        <div class="col-4 p-4 border bg-dark text-center"><a class="text-decoration-none text-info fs-2" href="{% url 'add_category' %}">ADD Category</a></div>
+        <div class="col-6 p-4 border bg-dark text-center"><a class="text-decoration-none text-danger fs-1" href="{% url 'overdue_task' %}">overdue tasks</a></div>
     </div>
 {% endblock content %}

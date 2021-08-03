@@ -8,24 +8,23 @@
     <div class="row ">
         {% for task in object_list %}
             {% if task.status == '0' %}
-                <div class="col-12 bg-light article-entry">
-                    <h2><a class="text-info" href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></h2>
-                    <p>
-                        {% remain_time task.due_date as remained %}
-
-                        {% if remained.0 == '-' %}
-                            <b style="color:red">{{ remained }} | overdue</b>
-                        {% elif remained.1 != 'd' %}
-                            <b style="color:green">{{ remained }} | today</b>
-                        {% elif remained.0 == '1' %}
-                            <b style="color:orange">{{ remained }} | tomorrow</b>
-                        {% else %}
-                            <b style="color:gray">{{ remained }}</b>
-                        {% endif %}
-                    </p>
-                    <input class="btn btn-success" type="submit" value="Finished">
-                    <hr class="p-1 bg-dark"><br>
-                </div>
+                {% remain_time task.due_date as remained %}
+                    {% if remained.0 != '-' %}
+                        <div class="col-12 bg-light article-entry">
+                            <h2><a class="text-info" href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></h2>
+                            <p>
+                                {% if remained.1 != 'd' %}
+                                    <b style="color:green">{{ remained }} | today</b>
+                                {% elif remained.0 == '1' %}
+                                    <b style="color:purple">{{ remained }} | tomorrow</b>
+                                {% else %}
+                                    <b style="color:gray">{{ remained }}</b>
+                                {% endif %}
+                            </p>
+                            <input class="btn btn-success" type="submit" value="Finished">
+                            <hr class="p-1 bg-dark"><br>
+                        </div>
+                    {% endif %}
             {% endif %}
         {% endfor %}
     </div>
