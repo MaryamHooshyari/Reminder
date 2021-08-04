@@ -1,10 +1,11 @@
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from .models import Task, Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import TaskCreateForm, TaskUpdateForm
 
 
+# Task views
 class TaskListView(ListView):
     """to show all tasks (in html I used template tag to remove overdue tasks)"""
     model = Task
@@ -40,9 +41,14 @@ class TaskDeleteView(DeleteView):
     success_url = reverse_lazy('task_list')
 
 
-not_used = Task.objects.no_task()
+class OverdueTaskList(ListView):
+    """to show all overdue tasks"""
+    model = Task
+    queryset = Task.objects.overdue_task()
+    template_name = 'todo/overdue_list.html'
 
 
+# Category views
 class CategoryListView(ListView):
     """
     to show all categories
@@ -98,9 +104,3 @@ class CategoryDeleteView(DeleteView):
     template_name = 'todo/category_delete.html'
     success_url = reverse_lazy('category_list')
 
-
-class OverdueTaskList(ListView):
-    """to show all overdue tasks"""
-    model = Task
-    queryset = Task.objects.overdue_task()
-    template_name = 'todo/overdue_list.html'

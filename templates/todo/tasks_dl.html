@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Download Tasks{% endblock title %}
+
+{% block content %}
+<b><a class="text-decoration-none" href="/tasks.json" download="tasks.json">
+    Download All Tasks
+</a></b>
+{% for t in object %}
+<p>{{ t.title }}</p>
+{% endfor %}
+{% endblock content %}

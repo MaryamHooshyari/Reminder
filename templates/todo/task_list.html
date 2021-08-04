@@ -6,11 +6,16 @@
 
 {% block content %}
     <div class="row ">
+        <p class="col-3 bg-warning p-3 border text-center">
+            <b><a class="text-decoration-none" href="{% url 'task_dl' %}">
+                Download All Tasks
+            </a></b>
+        </p>
         {% for task in object_list %}
             {% if task.status == '0' %}
                 {% remain_time task.due_date as remained %}
                     {% if remained.0 != '-' %}
-                        <div class="col-12 bg-light article-entry">
+                        <div class="col-12 bg-light">
                             <h2><a class="text-info" href="{{ task.get_absolute_url }}">{{ task.title }}</a></h2>
                             <p>
                                 {% if remained.1 != 'd' %}
