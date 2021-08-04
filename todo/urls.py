@@ -13,8 +13,7 @@ urlpatterns = [
     path('categories/<int:pk>/edit', CategoryUpdateView.as_view(), name='category_edit'),
     path('categories/<int:pk>/delete', CategoryDeleteView.as_view(), name='category_delete'),
     path('tasks/', TaskListView.as_view(), name='task_list'),
-    path('tasks/download/', json_download, name='task_dl'),
-    path('tasks/download/done', json_download_view, name='dl_done'),
+    path('tasks/download/', json_download_view, name='task_dl'),
     path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task_detail'),
     path('tasks/<int:pk>/edit', TaskUpdateView.as_view(), name='task_edit'),
     path('tasks/<int:pk>/delete', TaskDeleteView.as_view(), name='task_delete'),
@@ -22,4 +21,3 @@ urlpatterns = [
     path('addCategory/', CategoryCreateView.as_view(), name='add_category'),
     path('overdue/', OverdueTaskList.as_view(), name='overdue_task'),
 ]
-# TemplateView.as_view(template_name='todo/tasks_dl.html')

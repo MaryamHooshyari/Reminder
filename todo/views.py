@@ -1,16 +1,20 @@
 from django.http import HttpResponse
-from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView
 
 from Reminder.settings import BASE_DIR
 from .models import Task, Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import TaskCreateForm, TaskUpdateForm
+from django.core import serializers
 
 
 # download tasks list in json file
 def json_download_view(request):
     objects = Task.objects.all()
+    with open(str(BASE_DIR) + '/tasks.json', "w") as out:
+        mast_point = serializers.serialize("json", objects)
+        out.write(mast_point)
     file_task = open(str(BASE_DIR) + '/tasks.json', 'rb')
     response = HttpResponse(file_task, content_type='json')
     response['Content-Disposition'] = "attachment; filename=tasks.json" % objects
