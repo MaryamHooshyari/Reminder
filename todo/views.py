@@ -1,8 +1,20 @@
+from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, TemplateView
+
+from Reminder.settings import BASE_DIR
 from .models import Task, Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import TaskCreateForm, TaskUpdateForm
+
+
+# download tasks list in json file
+def json_download_view(request):
+    objects = Task.objects.all()
+    file_task = open(str(BASE_DIR) + '/tasks.json', 'rb')
+    response = HttpResponse(file_task, content_type='json')
+    response['Content-Disposition'] = "attachment; filename=tasks.json" % objects
+    return response
 
 
 # Task views
@@ -103,4 +115,3 @@ class CategoryDeleteView(DeleteView):
     model = Category
     template_name = 'todo/category_delete.html'
     success_url = reverse_lazy('category_list')
-

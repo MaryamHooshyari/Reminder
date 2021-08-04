@@ -4,7 +4,7 @@ from .serializer import json_download
 from django.views.generic.base import TemplateView
 from .views import TaskListView, TaskDetailView, TaskCreateView, TaskUpdateView, TaskDeleteView,\
     CategoryListView, CategoryDetailView, CategoryCreateView, CategoryUpdateView, CategoryDeleteView,\
-    OverdueTaskList
+    OverdueTaskList, json_download_view
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('categories/<int:pk>/delete', CategoryDeleteView.as_view(), name='category_delete'),
     path('tasks/', TaskListView.as_view(), name='task_list'),
     path('tasks/download/', json_download, name='task_dl'),
+    path('tasks/download/done', json_download_view, name='dl_done'),
     path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task_detail'),
     path('tasks/<int:pk>/edit', TaskUpdateView.as_view(), name='task_edit'),
     path('tasks/<int:pk>/delete', TaskDeleteView.as_view(), name='task_delete'),

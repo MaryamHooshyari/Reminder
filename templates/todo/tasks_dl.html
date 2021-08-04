@@ -3,10 +3,12 @@
 {% block title %}Download Tasks{% endblock title %}
 
 {% block content %}
-<b><a class="text-decoration-none" href="/tasks.json" download="tasks.json">
-    Download All Tasks
-</a></b>
-{% for t in object %}
-<p>{{ t.title }}</p>
-{% endfor %}
+    <b><a class="text-decoration-none" href="{% url 'dl_done' %}">
+        Download All Tasks
+    </a></b><br><br>
+    <ul>
+        {% for t in object %}
+            <li>{{ t.title }}</li>
+        {% endfor %}
+    </ul>
 {% endblock content %}
