@@ -5,10 +5,14 @@
 {% block content %}
 
     <h2 class="">Categories:</h2>
-    {% for category in object_list %}
-        {% if category in data%}
+    {% for category in all %}
+        {% if category not in not_used %}
             <div class="row justify-content-around">
-                <h4 class="col-10 p-2 border bg-dark"><a class="text-decoration-none text-info" href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
+                <h4 class="col-10 p-2 border bg-dark">
+                    <a class="text-decoration-none text-info" href="{% url 'category_detail' category.pk %}">
+                        {{ category.name }}
+                    </a>
+                </h4>
             </div>
         {% endif %}
     {% endfor %}
@@ -16,9 +20,13 @@
 <br><br>
 
     <h3 class="">Categories with no tasks:</h3>
-    {% for category in object_list %}
+    {% for category in not_used %}
             <div class="row justify-content-around">
-                <h4 class="col-10 p-2 border bg-dark"><a class="text-decoration-none text-info" href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></h4>
+                <h4 class="col-10 p-2 border bg-dark">
+                    <a class="text-decoration-none text-info" href="{% url 'category_detail' category.pk %}">
+                        {{ category.name }}
+                    </a>
+                </h4>
             </div>
     {% endfor %}
 

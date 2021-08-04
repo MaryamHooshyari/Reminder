@@ -1,4 +1,4 @@
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView
 from .models import Task, Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -40,17 +40,40 @@ class TaskDeleteView(DeleteView):
     success_url = reverse_lazy('task_list')
 
 
+not_used = Task.objects.no_task()
+
+
 class CategoryListView(ListView):
-    """to show all categories"""
+    """
+    to show all categories
+    (show categories in two different lists
+    first those with tasks and second categories with no tasks)
+    """
     model = Category
-    context = {'data': Task.objects.no_task()}
+    not_used = Task.objects.no_task()
     template_name = 'todo/category_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['all'] = self.model.objects.all()
+        context['not_used'] = self.not_used
+        return context
 
 
 class CategoryDetailView(DetailView):
-    """to show any category's detail"""
+    """
+    to show any category's detail
+    (show every task which belongs to that category)
+    """
     model = Category
+    all_tasks = Task.objects.all()
     template_name = 'todo/category_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['all'] = self.all_tasks
+        context['cat'] = self.model.objects.get(pk=self.kwargs.get('pk'))
+        return context
 
 
 class CategoryCreateView(CreateView):

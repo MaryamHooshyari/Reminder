@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %}{{object.name}}{% endblock title %}
+{% block title %}{{cat.name}}{% endblock title %}
 
 {% block content %}
 <div class="container">
-    <h2>{{object.name}}</h2>
-    <ul>
-        {% for task in object_list %}
-            <li><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></li>
+    <h2 class="text-info">{{cat.name}}</h2>
+    <div class="list-group">
+        {% for task in all %}
+            {% if task.category.name == cat.name %}
+                <a class="list-group-item list-group-item-action list-group-item-info"
+                   href="{% url 'task_detail' task.pk %}">
+                    {{ task.title }}
+                </a>
+            {% endif %}
         {% endfor %}
-    </ul>
+    </div>
 <br><br>
     <p><a class="btn btn-warning" href="{% url 'category_edit' object.pk %}">Edit Category</a></p>
     <p><a class="btn btn-danger" href="{% url 'category_delete' object.pk %}">Delete Category</a></p>
