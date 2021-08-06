@@ -1,6 +1,4 @@
-from django.contrib import admin
 from django.urls import path
-from .serializer import json_download
 from django.views.generic.base import TemplateView
 from .views import TaskListView, TaskDetailView, TaskCreateView, TaskUpdateView, TaskDeleteView,\
     CategoryListView, CategoryDetailView, CategoryCreateView, CategoryUpdateView, CategoryDeleteView,\

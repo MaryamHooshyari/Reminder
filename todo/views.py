@@ -11,7 +11,9 @@ from django.core import serializers
 
 # download tasks list in json file
 def json_download_view(request):
-    objects = Task.objects.all()
+    # find all in progress tasks
+    objects = Task.objects.filter(status='0')
+    # save 'objects' to a file in json style
     with open(str(BASE_DIR) + '/tasks.json', "w") as out:
         mast_point = serializers.serialize("json", objects)
         out.write(mast_point)

@@ -50,7 +50,7 @@ class Task(models.Model):
     due_date = models.DateTimeField()
     priority = models.CharField(max_length=5, choices=PRIORITY_CHOICES, default='1')
     # task's owner
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, default=1)
     # task's category
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='tasks')
     # 0: in progress & 1: done
